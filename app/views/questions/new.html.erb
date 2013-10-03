@@ -1,0 +1,9 @@
+<h1>Enter your question</h1>
+<%= form_for @question do |f| %>
+  <%= render 'shared/form_errors' %>
+  <%= f.label :title %>
+  <%= f.text_area :title %>
+  <%= f.label :content %>
+  <%= f.text_area :content %>
+  <%= f.submit "Post your question", class: "button" %>
+<% end %>

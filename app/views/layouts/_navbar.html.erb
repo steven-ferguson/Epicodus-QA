@@ -1,0 +1,29 @@
+<nav class="top-bar">
+  <ul class="title-area">
+    <li class="name">
+      <h1><%= link_to 'Questions', root_path %></h1>
+    </li>
+    <li class="toggle-topbar menu-icon"><a><span>Menu</span></a></li>
+  </ul>
+  <section class="top-bar-section">
+    <ul class="left">
+      <li class="divider">
+      <li class="active"><%= link_to 'Search', '#' %></li>
+      <li class="active"><%= link_to 'Users', '#' %></li>
+      <li class="divider"></li>
+    </ul>
+    <ul class="right">
+      <li class="divider"></li>
+      <% if user_signed_in? %>
+        <li><a>Logged in as: <%= current_user.name %></a></li>
+        <li class="divider"></li>
+        <li class="active"><%= link_to 'Sign out', destroy_user_session_path, method: 'delete' %></li>
+      <% else %>
+        <li class="active"><%= link_to 'Sign up', new_user_registration_path %></li>
+        <li class="divider"></li>
+        <li class="active"><%= link_to 'Sign in', new_user_session_path %></li>
+      <% end %>
+      <li class="divider"></li>
+    </ul>
+  </section>
+</nav>

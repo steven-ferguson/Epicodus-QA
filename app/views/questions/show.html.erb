@@ -1,0 +1,9 @@
+<h1><%= @question.title %></h1>
+
+<p><%= @question.content %></p>
+
+<p>Asked by <%= @question.user.name %></p>
+<p>at: <%= @question.created_at.strftime("Asked on %A %B %-d at %I:%m") %></p>
+
+<%= link_to "Answer", "#", class: "button" %>
+

@@ -1,0 +1,14 @@
+<h1>Hack Overflow</h1>
+
+<%= link_to "Ask a question", new_question_path, class: "button" %>
+
+<ul>
+  <% @questions.each do |question| %>
+    <li><%= link_to question.title, question_path(question) %>
+      <div>Asked by: <%= question.user.name %> at: <%= question.created_at.strftime("Asked on %A %B %-d at %I:%m") %>
+      </div>
+    </li>
+  <% end %>
+</ul>  
+
+
