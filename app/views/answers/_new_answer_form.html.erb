@@ -1,0 +1,8 @@
+<h3>Answer</h3>
+<%= form_for @answer, id: "new_answer", remote: true do |f| %>
+  <%= render "shared/form_errors", object: @answer %>
+  <%= f.hidden_field :question_id %>
+  <%= f.label :content %>
+  <%= f.text_area :content %>
+  <%= f.submit "Post your answer", class: "button" %>
+<% end %>

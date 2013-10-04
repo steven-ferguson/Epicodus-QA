@@ -5,5 +5,13 @@
 <p>Asked by <%= @question.user.name %></p>
 <p>at: <%= @question.created_at.strftime("Asked on %A %B %-d at %I:%m") %></p>
 
-<%= link_to "Answer", "#", class: "button" %>
+<%= link_to "Answer", new_answer_path(question_id: @question.id), id: "answer-button", class: "button", remote: true %>
 
+<section id="answer-list" class="answers">
+  <% @question.answers.each do |answer| %>
+    <p><%= answer.content %></p>
+    <p>
+      Answered by <%= answer.user.name %> <%= answer.created_at.strftime("Answered on %A %B %-d at %I:%m") %>
+    </p>
+  <% end %>
+</section>

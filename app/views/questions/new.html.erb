@@ -1,6 +1,6 @@
 <h1>Enter your question</h1>
 <%= form_for @question do |f| %>
-  <%= render 'shared/form_errors' %>
+  <%= render 'shared/form_errors', object: @question %>
   <%= f.label :title %>
   <%= f.text_area :title %>
   <%= f.label :content %>
