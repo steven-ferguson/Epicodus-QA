@@ -1,0 +1,4 @@
+<p><%= @comment.content %></p>
+<p>
+  Posted by <%= @comment.user.email %> <%= @comment.created_at.strftime("Posted on %A %B %-d at %I:%m") %>
+</p>

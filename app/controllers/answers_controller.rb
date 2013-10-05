@@ -1,6 +1,7 @@
 class AnswersController < ApplicationController 
+
   def new 
-    @answer = current_user.answers.new(question_id: params[:question_id])
+    @answer = Answer.new(question_id: params[:question_id], :user => current_user)
   end
 
   def create
@@ -11,10 +12,11 @@ class AnswersController < ApplicationController
         format.js
       end
     else 
-      redirect_to @answer.question
+      render 'new.js'
     end
-
   end
+
+
 
 private
   def answer_params 

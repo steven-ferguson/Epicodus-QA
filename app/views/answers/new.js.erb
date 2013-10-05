@@ -1,1 +1,7 @@
-$('#answer-button').hide().after("<%= j render('new_answer_form') %>");
+<% if !current_user.nil? %>
+  $('#answer-button').hide();
+  $('#form').empty().append("<%= j render('new_answer_form') %>");
+<% else %>
+  window.location.replace('<%= request.base_url %>/users/sign_in');
+<% end %>
+

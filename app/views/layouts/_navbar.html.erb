@@ -15,7 +15,7 @@
     <ul class="right">
       <li class="divider"></li>
       <% if user_signed_in? %>
-        <li><a>Logged in as: <%= current_user.name %></a></li>
+        <li><a>Logged in as: <%= current_user.email %></a></li>
         <li class="divider"></li>
         <li class="active"><%= link_to 'Sign out', destroy_user_session_path, method: 'delete' %></li>
       <% else %>

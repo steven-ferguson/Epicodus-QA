@@ -15,4 +15,10 @@ FactoryGirl.define do
     content "This is my question"
     user
   end
+
+  factory :answer do 
+    content "This is the answer"
+    user 
+    question
+  end
 end

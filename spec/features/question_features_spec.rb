@@ -47,14 +47,86 @@ feature "Answer a question" do
     fill_in 'Password', :with => user.password
     click_on "Submit"
   end
-  scenario "a successfully submits and answer" do
+  
+  scenario "a user successfully submits an answer", js: true do
     question = FactoryGirl.create(:question)
-    visit root_path
-    click_on question.title
-    click_on "Answer"
+    visit question_path(question)
+    click_link "Answer"
     fill_in "answer_content", :with => "I know everything"
-    click_on "Submit"
+    click_on "Post your answer"
     page.should have_content "I know everything"
   end
+  
+  scenario "a user unsuccessfully submits an answer", js: true do
+    question = FactoryGirl.create(:question)
+    visit question_path(question)
+    click_link "Answer"
+    click_on "Post your answer"
+    page.should have_content "blank"
+  end
 end
+
+feature "Vote on an answer" do
+  before do 
+    user = FactoryGirl.create(:user)
+    visit root_path
+    click_link "Sign in"
+    fill_in 'Email', :with => user.email
+    fill_in 'Password', :with => user.password
+    click_on "Submit"
+  end
+
+  scenario "a user votes on an answer" do
+    question = FactoryGirl.create(:question)
+    answer = question.answers.create(:user => question.user, :content => "Answer here")
+    visit question_path(question)
+    click_link "Upvote"
+    page.should have_content "votes: 1"
+  end
+end
+
+feature "Comment on a question" do 
+  before do 
+    user = FactoryGirl.create(:user)
+    visit root_path
+    click_link "Sign in"
+    fill_in 'Email', :with => user.email
+    fill_in 'Password', :with => user.password
+    click_on "Submit"
+  end
+
+  scenario "a user successfully posts a comment", js: true do 
+    question = FactoryGirl.create(:question)
+    visit question_path(question)
+    click_link "Comment"
+    fill_in 'comment_content', with: "This is my comment"
+    click_link "Post comment"
+    page.should have_content "successfully"
+    page.should have_content "This is my comment"
+  end
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

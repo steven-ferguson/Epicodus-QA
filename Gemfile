@@ -8,6 +8,7 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
+gem 'compass-rails', '~> 2.0.alpha.0'
 gem 'zurb-foundation'
 gem 'devise'
 
@@ -18,12 +19,15 @@ end
 
 group :test, :development do 
   gem 'rspec-rails'
+  gem 'pry'
+  gem 'pry-debugger'
 end
 
 group :test do 
   gem 'shoulda-matchers'
   gem 'capybara'
   gem 'factory_girl_rails'
+  gem 'poltergeist'
 end
 
 # Use ActiveModel has_secure_password

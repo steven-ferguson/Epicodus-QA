@@ -1,0 +1,9 @@
+<h3>Comment</h3>
+<%= form_for @comment, id: "new_comment", remote: true do |f| %>
+  <%= render "shared/form_errors", object: @comment %>
+  <%= f.hidden_field :commentable_id %>
+  <%= f.hidden_field :commentable_type %> 
+  <%= f.label :content %>
+  <%= f.text_area :content %>
+  <%= f.submit "Post your comment", class: "button" %>
+<% end %>

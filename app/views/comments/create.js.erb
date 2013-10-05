@@ -1,0 +1,8 @@
+$('#new_comment').remove();
+$('#answer-button').show();
+$('.comment-button').show();
+<% if @comment.commentable_type == 'Question' %>
+  $('#question-comment-list').append('<%= j render(@comment) %>');
+<% else %>
+  $('#answer-comment-list-<%= @comment.commentable_id %>').append('<%= j render(@comment) %>');
+<% end %>
