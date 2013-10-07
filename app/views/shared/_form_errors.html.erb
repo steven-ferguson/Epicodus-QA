@@ -1,7 +1,9 @@
-<% if object.errors.any? %>
-  <ul>
-    <% object.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  </ul>
-<% end %>
+<div class="form-errors large-offset-1 columns">
+	<% if object.errors.any? %>
+	  <ul>
+	    <% object.errors.full_messages.each do |message| %>
+	      <li><%= message %></li>
+	    <% end %>
+	  </ul>
+	<% end %>
+</div>
