@@ -1,4 +1,5 @@
-<p><%= @comment.content %></p>
-<p>
-  Posted by <%= @comment.user.email %> <%= @comment.created_at.strftime("Posted on %A %B %-d at %I:%m") %>
+<hr class='min_margin'>
+<p class='min_margin'><%= object.content %> - 
+  <a><%= object.user.email %></a> 
+  <%= object.created_at.strftime("(%A %B %-d at %I:%m)") %> 
 </p>

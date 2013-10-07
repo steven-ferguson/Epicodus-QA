@@ -1,8 +1,6 @@
-$('#new_comment').remove();
-$('#answer-button').show();
-$('.comment-button').show();
+$('#new-comment-view').remove();
 <% if @comment.commentable_type == 'Question' %>
-  $('#question-comment-list').append('<%= j render(@comment) %>');
+  $('#question-comment-list').append('<%= j render "comments/comment", object: @comment %>');
 <% else %>
-  $('#answer-comment-list-<%= @comment.commentable_id %>').append('<%= j render(@comment) %>');
+  $('#answer-comment-list-<%= @comment.commentable_id %>').append('<%= j render "comments/comment", object: @comment %>');
 <% end %>

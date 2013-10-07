@@ -1,28 +1,35 @@
-<h1><%= @question.title %></h1>
+<div class="row">
+  <h1 class="center"><%= @question.title %></h1>
+</div>
+<div id="question" class="row">
+  <div class="row">
+    <h3 class="subheader"><%= @question.title %></h3>
+    <h6 class="subheader">Asked by <%= @question.user.email %> at: <%= @question.created_at.strftime("%A %B %-d at %I:%m") %></h6>
+  </div>
+  <div class="row">
+    <p><%= @question.content %>
+  </div>
+  <div class="row">
+    <%= link_to "Answer",
+                new_answer_path(question_id: @question.id),
+                id: "answer-button",
+                remote: true %> ||
+    <%= link_to "Improve this question",
+                new_comment_path(commentable_id: @question.id, commentable_type: "Question"),
+                id: "question-comment-button",
+                class: "comment-button",
+                remote: true %>
+  </div>
+  <br>
+  <div id="question-comment-list" class='row'>
+    <% @question.comments.each do |comment| %>
+      <%= render 'comments/comment', object: comment %>
+    <% end %>
+  </div>
+  <div class='row'><hr class='min_margin'></div>
+</div>
 
-<p><%= @question.content %></p>
-
-<p>Asked by <%= @question.user.email %></p>
-<p>at: <%= @question.created_at.strftime("Asked on %A %B %-d at %I:%m") %></p>
-
-<p><%= link_to "Comment", new_comment_path(commentable_id: @question.id, commentable_type: "Question"), id: "question-comment-button", class: "comment-button", remote: true %></p>  
-
-<section id="question-comment-list" class="comments">
-  <% @question.comments.each do |comment| %>
-    <p><%= comment.content %></p>
-    <p>Posted by <%= comment.user.email %>
-                 <%= comment.created_at.strftime("Posted on %A %B %-d at %I:%m") %> 
-    </p>
-  <% end %>
-</section>
-
-<%= link_to "Answer",
-            new_answer_path(question_id: @question.id),
-            id: "answer-button",
-            class: "button",
-            remote: true %>
-
-<div id="form"></div>
+<div id="form" class="row"></div>
 <section id="answer-list" class="answers">
   <% @question.answers.each do |answer| %>
     <p><%= answer.content %></p>

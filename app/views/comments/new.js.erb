@@ -1,6 +1,4 @@
-<% if !current_user.nil? %> 
-  $('.comment-button').hide();
-  $('#answer-button').hide();
+<% if current_user %> 
   $('#form').empty().append("<%= j render('new_comment_form') %>");
 <% else %>
   window.location.replace('<% request.base_url %>/users/sign_in');
