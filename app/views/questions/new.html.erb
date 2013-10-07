@@ -1,9 +1,27 @@
-<h1>Enter your question</h1>
-<%= form_for @question do |f| %>
-  <%= render 'shared/form_errors', object: @question %>
-  <%= f.label :title %>
-  <%= f.text_area :title %>
-  <%= f.label :content %>
-  <%= f.text_area :content %>
-  <%= f.submit "Post your question", class: "button" %>
-<% end %>
+<div class="row">
+	<h1 class="center">Enter your question</h1>
+</div>
+<div class="row">
+	<%= form_for @question do |f| %>
+		<div class="row">
+			<div class="row">
+		  	<%= render 'shared/form_errors', object: @question %>
+		  </div>
+		  <div class='row'>
+		  	<%= f.label :title %>
+		  </div>
+		  <div class="row">
+		  	<%= f.text_field :title %>
+		  </div>
+		  <div class="row">
+		  	<%= f.label :content %>
+		  </div>
+		  <div class="row">
+		  	<%= f.text_area :content %>
+		  </div>
+		  <div class="row">
+		  	<%= f.submit "Post your question", class: "button" %>
+			</div>
+		</div>
+	<% end %>
+</div>

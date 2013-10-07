@@ -1,3 +1,4 @@
+@import "foundation/variables";
 
 .center {
 	text-align: center;
@@ -5,4 +6,8 @@
 
 .form-errors {
 	color: #7f0a0c;
+}
+
+textarea {
+	height: em-calc(150px);
 }
