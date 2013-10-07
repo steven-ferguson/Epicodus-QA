@@ -106,27 +106,27 @@ feature "Comment on a question" do
   end
 end
 
+feature "Delete a comment" do
+  let(:user) { FactoryGirl.create :user }
+  let(:question) { FactoryGirl.create(:question) }
+  before do 
+    visit root_path
+    click_link "Sign in"
+    fill_in 'Email', :with => user.email
+    fill_in 'Password', :with => user.password
+    click_on "Submit"
+  end
 
+  scenario "a user successfully deletes their comment", js: true do
+    comment = question.comments.create(user: user, content: "This is a comment")
+    visit question_path(question)
+    find(".fi-trash").trigger('click')
+    page.should_not have_content "This is a comment"
+  end
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  scenario "a user visits a question page with no comments that they have written" do 
+    comment = question.comments.create(user: FactoryGirl.create(:user), content: "This is a comment")
+    visit question_path(question)
+    page.should_not have_css('.fi-trash')
+  end
+end

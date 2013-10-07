@@ -1,5 +1,10 @@
-<hr class='min_margin'>
-<p class='min_margin'><%= object.content %> - 
-  <a><%= object.user.email %></a> 
-  <%= object.created_at.strftime("(%A %B %-d at %I:%m)") %> 
-</p>
+<div id="comment-<%= object.id %>">
+  <hr class='min_margin'>
+  <p class='min_margin'><%= object.content %> - 
+    <a><%= object.user.email %></a> 
+    <%= object.created_at.strftime("(%A %B %-d at %I:%m)") %>
+    <% if current_user == object.user %>
+      <%= link_to '', comment_path(object), method: 'delete', class: 'fi-trash', remote: true %>
+    <% end %>
+  </p>
+</div>

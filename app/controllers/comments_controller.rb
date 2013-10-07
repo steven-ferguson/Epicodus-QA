@@ -22,6 +22,16 @@ class CommentsController < ApplicationController
     end
   end
 
+  def destroy
+    @comment = Comment.find(params[:id])
+    if current_user = @comment.user
+      @comment.destroy
+      render 'delete.js'
+    else
+      redirect_to question_path(@comment.parent_question)
+    end
+  end
+
 private
   def comment_params
     params.require(:comment).permit(:user_id, :commentable_id, :commentable_type, :content)

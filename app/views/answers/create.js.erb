@@ -1,3 +1,4 @@
 $('#new_answer').remove();
 $('#answer-button').show();
 $('#answer-list').append('<%= j render "answers/answer", object: @answer %>');
+$('#answer-list h3').empty().append('<%= pluralize(@answer.question.answers.count, "Answer") %>');
