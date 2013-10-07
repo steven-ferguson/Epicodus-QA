@@ -1,6 +1,13 @@
 class CommentsController < ApplicationController
   def new
     @comment = Comment.new(commentable_id: params[:commentable_id], commentable_type: params[:commentable_type])
+    if params[:commentable_type] == 'Question'
+      @type = 'Question'
+      @parent = Question.find(params[:commentable_id])
+    else 
+      @type = 'Answer'
+      @parent = Answer.find(params[:commentable_id])
+    end
   end
 
   def create

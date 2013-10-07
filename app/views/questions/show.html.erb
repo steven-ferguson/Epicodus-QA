@@ -30,25 +30,12 @@
 </div>
 
 <div id="form" class="row"></div>
-<section id="answer-list" class="answers">
-  <% @question.answers.each do |answer| %>
-    <p><%= answer.content %></p>
-    <p>
-      Answered by <%= answer.user.email %> <%= answer.created_at.strftime("Answered on %A %B %-d at %I:%m") %> 
-    </p>
-    <p><%= link_to 'Upvote', votes_path(vote: {answer_id: answer.id}), method: 'post', class: "button" %> Number of votes: <%= answer.votes.count %>
-    </p>  
-    <p><%= link_to "Comment", new_comment_path(commentable_id: answer.id, commentable_type: "Answer"), class: "comment-button", remote: true %></p> 
-    
-    <section id="answer-comment-list-<%= answer.id %>" class="comments">
-      <% answer.comments.each do |comment| %>
-        <p><%= comment.content %></p>
-        <p>
-          Posted by <%= comment.user.email %> <%= comment.created_at.strftime("Posted on %A %B %-d at %I:%m") %> 
-        </p>
-      <% end %>
-    </section>
 
+<section id="answer-list" class="answers row">
+  <h3><%= pluralize(@question.answers.count, "Answer") %></h3>
+  <% if @question.answers.any? %>
+    <% @question.answers.each do |answer| %>
+      <%= render 'answers/answer', object: answer %>
+    <% end %>
   <% end %>
-
 </section>

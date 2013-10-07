@@ -1,4 +1,23 @@
-<p><%= @answer.content %></p>
-<p>
-  Answered by <%= @answer.user.email %> <%= @answer.created_at.strftime("Answered on %A %B %-d at %I:%m") %>
-</p>
+<div id="answer-<%= object.id %>" class="row">
+  <div class='columns small-1'>
+    <%= link_to '/\\', votes_path(vote: {answer_id: object.id}), method: 'post'%>
+    <h4><%= object.votes.count %></h4>
+    <a>\/</a>
+  </div>
+  <div class='columns small-11'>
+    <p>
+      <%= object.content %><br>
+      <a><%= object.user.email %></a> - 
+      <%= object.created_at.strftime("%A %B %-d at %I:%m") %>
+    </p>
+    <%= link_to "Comment", new_comment_path(commentable_id: object.id, commentable_type: "Answer"),
+                class: "comment-button", remote: true %>
+    
+    <div id="answer-comment-list-<%= object.id %>" class="comments">
+      <% object.comments.each do |comment| %>
+        <%= render 'comments/comment', object: comment %>
+      <% end %>
+    </div>
+  </div>
+  <hr class="min_margin">
+</div>
