@@ -80,8 +80,8 @@ feature "Vote on an answer" do
     question = FactoryGirl.create(:question)
     answer = question.answers.create(:user => question.user, :content => "Answer here")
     visit question_path(question)
-    click_link "Upvote"
-    page.should have_content "votes: 1"
+    find(".fis-thumb-up").click
+    page.should have_content "1"
   end
 end
 
@@ -98,9 +98,9 @@ feature "Comment on a question" do
   scenario "a user successfully posts a comment", js: true do 
     question = FactoryGirl.create(:question)
     visit question_path(question)
-    click_link "Comment"
+    click_link "Improve this question"
     fill_in 'comment_content', with: "This is my comment"
-    click_link "Post comment"
+    click_on "Post your comment"
     page.should have_content "successfully"
     page.should have_content "This is my comment"
   end

@@ -2,5 +2,8 @@
   <div class="alert-box"><%= notice %></div>
 <% elsif flash[:alert] %>
   <div class="alert-box alert"><%= alert %></div>
+<% elsif flash[:info] %>
+  <div class="alert-box success"><%= info %></div>
 <% end %>
+
 

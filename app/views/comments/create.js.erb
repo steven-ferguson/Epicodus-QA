@@ -4,3 +4,4 @@ $('#new-comment-view').remove();
 <% else %>
   $('#answer-comment-list-<%= @comment.commentable_id %>').append('<%= j render "comments/comment", object: @comment %>');
 <% end %>
+$('#ajax-flash').empty().append("<div class='alert-box success'>Comment successfully added!</div>").fadeOut(5000);

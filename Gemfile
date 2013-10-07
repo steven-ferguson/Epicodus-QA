@@ -10,6 +10,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 gem 'compass-rails', '~> 2.0.alpha.0'
 gem 'zurb-foundation'
+gem 'foundicons-rails'
 gem 'devise'
 
 group :doc do
