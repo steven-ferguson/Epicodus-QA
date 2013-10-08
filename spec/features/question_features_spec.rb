@@ -18,11 +18,8 @@ feature "Post a question" do
 
   scenario "a user does not submit a valid question" do
     user = FactoryGirl.create(:user)
+    login_as(user, :scope => :user)
     visit root_path
-    click_link "Sign in"
-    fill_in 'Email', :with => user.email
-    fill_in 'Password', :with => user.password
-    click_on "Submit"
     click_link "Ask a question"
     click_on "Post your question"
     page.should have_content 'blank'
@@ -35,78 +32,6 @@ feature "View a question" do
     visit root_path
     click_on question.title
     page.should have_content(question.content)
-  end
-end
-
-feature "Answer a question" do
-  before do 
-    user = FactoryGirl.create(:user)
-    visit root_path
-    click_link "Sign in"
-    fill_in 'Email', :with => user.email
-    fill_in 'Password', :with => user.password
-    click_on "Submit"
-  end
-  
-  scenario "a user successfully submits an answer", js: true do
-    question = FactoryGirl.create(:question)
-    visit question_path(question)
-    click_link "Answer"
-    fill_in "answer_content", :with => "I know everything"
-    click_on "Post your answer"
-    page.should have_content "I know everything"
-  end
-  
-  scenario "a user unsuccessfully submits an answer", js: true do
-    question = FactoryGirl.create(:question)
-    visit question_path(question)
-    click_link "Answer"
-    click_on "Post your answer"
-    page.should have_content "blank"
-  end
-end
-
-feature "Vote on an answer" do
-  before do 
-    user = FactoryGirl.create(:user)
-    visit root_path
-    click_link "Sign in"
-    fill_in 'Email', :with => user.email
-    fill_in 'Password', :with => user.password
-    click_on "Submit"
-  end
-
-  scenario "a user votes on an answer" do
-    question = FactoryGirl.create(:question)
-    answer = question.answers.create(:user => question.user, :content => "Answer here")
-    visit question_path(question)
-    find(".fis-thumb-up").click
-    page.should have_content "1"
-  end
-end
-
-feature "Delete a comment" do
-  let(:user) { FactoryGirl.create :user }
-  let(:question) { FactoryGirl.create(:question) }
-  before do 
-    visit root_path
-    click_link "Sign in"
-    fill_in 'Email', :with => user.email
-    fill_in 'Password', :with => user.password
-    click_on "Submit"
-  end
-
-  scenario "successfully", js: true do
-    comment = question.comments.create(user: user, content: "This is a comment")
-    visit question_path(question)
-    find(".fi-trash").trigger('click')
-    page.should_not have_content "This is a comment"
-  end
-
-  scenario "a user visits a question page with no comments that they have written" do 
-    comment = question.comments.create(user: FactoryGirl.create(:user), content: "This is a comment")
-    visit question_path(question)
-    page.should_not have_css('.fi-trash')
   end
 end
 

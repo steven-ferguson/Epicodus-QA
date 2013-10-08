@@ -3,16 +3,12 @@ require 'spec_helper'
 feature "Comment on a question" do 
   before do 
     user = FactoryGirl.create(:user)
-    visit root_path
-    click_link "Sign in"
-    fill_in 'Email', :with => user.email
-    fill_in 'Password', :with => user.password
-    click_on "Submit"
+    login_as(user, :scope => :user)
+    question = FactoryGirl.create(:question)
+    visit question_path(question)
   end
 
   scenario "a user successfully posts a comment", js: true do 
-    question = FactoryGirl.create(:question)
-    visit question_path(question)
     click_link "Improve this question"
     fill_in 'comment_content', with: "This is my comment"
     click_on "Post your comment"
@@ -21,8 +17,6 @@ feature "Comment on a question" do
   end
 
   scenario "unsuccessfully posting a comment", js: true do 
-    question = FactoryGirl.create(:question)
-    visit question_path(question)
     click_link "Improve this question"
     click_on "Post your comment"
     page.should have_content "can't"
@@ -50,5 +44,26 @@ feature "Comment on an answer" do
     click_on "Post your comment"
     page.should have_content "can't"
     page.should_not have_content "successfully"
+  end
+end
+
+feature "Delete a comment" do 
+ let(:question) { FactoryGirl.create(:question) }
+
+  scenario "successfully", js: true do
+    user = FactoryGirl.create(:user)
+    login_as(user, :scope => :user)
+    comment = question.comments.create(user: user, content: "This is a comment")
+    visit question_path(question)
+    find(".fi-trash").trigger('click')
+    page.should_not have_content "This is a comment"
+  end
+
+  scenario "a user visits a question page with no comments that they have written" do 
+    user = FactoryGirl.create(:user)
+    login_as(user, :scope => :user)
+    comment = question.comments.create(user: FactoryGirl.create(:user), content: "This is a comment")
+    visit question_path(question)
+    page.should_not have_css('.fi-trash')
   end
 end
