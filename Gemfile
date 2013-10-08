@@ -12,6 +12,8 @@ gem 'compass-rails', '~> 2.0.alpha.0'
 gem 'zurb-foundation'
 gem 'foundicons-rails'
 gem 'devise'
+gem 'will_paginate'
+gem 'foundation-will_paginate'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

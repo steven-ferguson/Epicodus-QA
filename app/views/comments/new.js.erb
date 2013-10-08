@@ -1,5 +1,5 @@
 <% if current_user %> 
-  <% if @type == 'Question' %>
+  <% if @comment.commentable_type == 'Question' %>
     $('#form').empty().append("<%= j render('new_comment_form') %>");
   <% else %>
     $('#answer-comment-list-<%= @parent.id %>').append ("<%= j render('new_comment_form') %>");

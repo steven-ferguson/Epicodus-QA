@@ -8,27 +8,36 @@
 		<%= link_to "Ask a question", new_question_path, class: "button" %>
 	</div>
 </div>
-<div class='row'>
-<ul class="no-bullet">
-  <% @questions.each do |question| %>
-    <li>
-      <hr>
-      <div class="row">
-        <div class="small-2 columns">
-          <h3 class="subheader"><%= pluralize(question.answers.count, "Answer") %><h3>
-        </div>
-        <div class="small-9 columns">
-          <div class="row">
-            <h4 class="subheader"><%= link_to question.title, question_path(question) %></h4>
-          </div>
-          <div class="row">
-            <p class='text-right'><%= question.user.email %> at: <%= question.created_at.strftime("Asked on %A %B %-d at %I:%m") %></p>
-          </div>
-        </div>
-      </div>
-    </li>
-  <% end %>
-</ul>
+<div class="row">
+  <div class="small-2 small-offset-10 columns">
+    <h5><%= foundation_paginate @questions %></h5>
+  </div>
 </div>
+<div class='row'>
+  <ul class="no-bullet">
+    <% @questions.each do |question| %>
+      <li>
+        <hr>
+        <div class="row">
+          <div class="small-2 columns">
+            <h3 class="subheader"><%= pluralize(question.answers.count, "Answer") %><h3>
+          </div>
+          <div class="small-9 columns">
+            <div class="row">
+              <h4 class="subheader"><%= link_to question.title, question_path(question) %></h4>
+            </div>
+            <div class="row">
+              <p class='text-right'><%= question.user.email %> at: <%= question.created_at.strftime("Asked on %A %B %-d at %I:%m") %></p>
+            </div>
+          </div>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+</div>
+<div class="row">
+  <h5><%= foundation_paginate @questions %></h5>
+</div>
+
 
 
