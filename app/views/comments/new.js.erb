@@ -2,7 +2,7 @@
   <% if @comment.commentable_type == 'Question' %>
     $('#form').empty().append("<%= j render('new_comment_form') %>");
   <% else %>
-    $('#answer-comment-list-<%= @parent.id %>').append ("<%= j render('new_comment_form') %>");
+    $('#answer-comment-list-<%= @comment.commentable_id %>').append ("<%= j render('new_comment_form') %>");
   <% end %>
 <% else %>
   window.location.replace('<% request.base_url %>/users/sign_in');

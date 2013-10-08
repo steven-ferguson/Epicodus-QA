@@ -30,15 +30,25 @@ feature "Comment on a question" do
 end
 
 feature "Comment on an answer" do
-  scenario "successfully posting a comment", js: true do 
+  before do 
     user = FactoryGirl.create(:user)
     login_as(user, :scope => :user)
     question = FactoryGirl.create(:question)
     FactoryGirl.create(:answer, question: question)
     visit question_path(question)
+  end
+
+  scenario "successfully posting a comment", js: true do 
     click_on "Comment"
-    fill_in 'comment content', with: "This is my comment"
+    fill_in 'comment_content', with: "This is my comment"
     click_on "Post your comment"
     page.should have_content "This is my comment"
+  end
+
+  scenario "invalid comment", js: true do 
+    click_on "Comment"
+    click_on "Post your comment"
+    page.should have_content "can't"
+    page.should_not have_content "successfully"
   end
 end
