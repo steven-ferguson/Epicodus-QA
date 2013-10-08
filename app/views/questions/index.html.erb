@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="small-8 large-6 columns">
-		<h1>Epicodus Overflow</h1>
+		<h1>EpiQuestions</h1>
 	</div>
 </div>
 <div class="row">
@@ -9,10 +9,22 @@
 	</div>
 </div>
 <div class='row'>
-<ul>
+<ul class="no-bullet">
   <% @questions.each do |question| %>
-    <li><%= link_to question.title, question_path(question) %>
-      <div>Asked by: <%= question.user.name %> at: <%= question.created_at.strftime("Asked on %A %B %-d at %I:%m") %>
+    <li>
+      <hr>
+      <div class="row">
+        <div class="small-2 columns">
+          <h3 class="subheader"><%= pluralize(question.answers.count, "Answer") %><h3>
+        </div>
+        <div class="small-9 columns">
+          <div class="row">
+            <h4 class="subheader"><%= link_to question.title, question_path(question) %></h4>
+          </div>
+          <div class="row">
+            <p class='text-right'><%= question.user.email %> at: <%= question.created_at.strftime("Asked on %A %B %-d at %I:%m") %></p>
+          </div>
+        </div>
       </div>
     </li>
   <% end %>
