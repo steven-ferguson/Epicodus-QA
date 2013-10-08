@@ -41,3 +41,4 @@ private
     params.require(:comment).permit(:user_id, :commentable_id, :commentable_type, :content)
   end
 end
+
