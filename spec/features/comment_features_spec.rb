@@ -47,6 +47,33 @@ feature "Comment on an answer" do
   end
 end
 
+feature "Edit a comment" do
+  let(:question) { FactoryGirl.create(:question) }
+
+  scenario "a user submits a valid edit on their comment of a question", js: true do
+    user = FactoryGirl.create(:user)
+    login_as(user, :scope => :user)
+    comment = question.comments.create(user: user, content: "This is a comment")
+    visit question_path(question)
+    find(".fi-edit").trigger('click')
+    fill_in 'comment_content', :with => " Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+    click_on('Update')
+    page.should have_content "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+  end
+
+  scenario "a user submits a valid edit on their comment of an answer", js: true do 
+    user = FactoryGirl.create(:user)
+    login_as(user, :scope => :user)
+    answer = FactoryGirl.create(:answer, question: question)
+    comment = answer.comments.create(user: user, content: "This is a comment")
+    visit question_path(question)
+    find(".fi-edit").trigger('click')
+    fill_in 'comment_content', :with => " Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+    click_on('Update')
+    page.should have_content "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book." 
+  end
+end
+
 feature "Delete a comment" do 
  let(:question) { FactoryGirl.create(:question) }
 

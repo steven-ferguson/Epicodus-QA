@@ -1,5 +1,5 @@
 <% if @comment.commentable_type == 'Question' %>
   $('#form').empty().append("<%= j render 'edit_comment', comment: @comment %>");
 <% else %>
-  $('#answer-comment-list-<%= @parent.id %>').append ("<%= j render 'edit_comment', comment: @comment %>");
+  $('#answer-comment-list-<%= @comment.commentable_id %>').append ("<%= j render 'edit_comment', comment: @comment %>");
 <% end %>

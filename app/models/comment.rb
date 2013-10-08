@@ -14,8 +14,4 @@ class Comment < ActiveRecord::Base
       self.commentable.question
     end    
   end
-
-  def parent_type 
-    commentable_type
-  end
 end

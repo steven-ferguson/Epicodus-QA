@@ -1,18 +1,21 @@
 <div id="answer-<%= object.id %>" class="row">
   <div class='columns small-1 center'>
     <%= link_to '', votes_path(vote: {answer_id: object.id}), class: "fis-thumb-up", method: 'post'%>
-    <%= link_to '', '#', class: "fis-thumb-down", method: 'post'%>
     <h4><%= object.votes.count %></h4>
   </div>
   <div class='columns small-11'>
-    <p>
-      <%= object.content %><br>
-      <a><%= object.user.email %></a> - 
-      <%= object.created_at.strftime("%A %B %-d at %I:%m") %>
-    </p>
-    <%= link_to "Comment", new_comment_path(commentable_id: object.id, commentable_type: "Answer"),
-                class: "comment-button", remote: true %>
-    
+    <div class="row">
+      <p><%= object.content %></p>
+    </div>
+    <div class="row">
+      <div class="small-2 columns"><%= link_to "Comment", new_comment_path(commentable_id: object.id, commentable_type: "Answer"),
+                  class: "comment-button", remote: true %></div>
+      <p class="text-right">
+        <a><%= object.user.email %></a> - 
+        <%= object.created_at.strftime("%A %B %-d at %I:%m") %>
+      </p>
+    </div>
+      
     <div id="answer-comment-list-<%= object.id %>" class="comments">
       <% object.comments.each do |comment| %>
         <%= render 'comments/comment', object: comment %>
