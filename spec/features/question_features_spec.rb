@@ -117,7 +117,7 @@ feature "Delete a comment" do
     click_on "Submit"
   end
 
-  scenario "a user successfully deletes their comment", js: true do
+  scenario "successfully", js: true do
     comment = question.comments.create(user: user, content: "This is a comment")
     visit question_path(question)
     find(".fi-trash").trigger('click')
@@ -128,5 +128,26 @@ feature "Delete a comment" do
     comment = question.comments.create(user: FactoryGirl.create(:user), content: "This is a comment")
     visit question_path(question)
     page.should_not have_css('.fi-trash')
+  end
+end
+
+feature "Edit a comment" do
+  let(:user) { FactoryGirl.create :user }
+  let(:question) { FactoryGirl.create(:question) }
+  before do 
+    visit root_path
+    click_link "Sign in"
+    fill_in 'Email', :with => user.email
+    fill_in 'Password', :with => user.password
+    click_on "Submit"
+  end
+
+  scenario "successfully", js: true do
+    comment = question.comments.create(user: user, content: "This is a comment")
+    visit question_path(question)
+    find(".fi-edit").trigger('click')
+    fill_in 'comment_content', :with => " Additional text"
+    click_on('Update')
+    page.should have_content "Additional text"
   end
 end

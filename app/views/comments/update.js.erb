@@ -1,0 +1,2 @@
+$('#edit-comment-view').remove();
+$('#comment-<%= @comment.id %>').children('p').first().children('span').first().empty().append('<%= @comment.content %>');

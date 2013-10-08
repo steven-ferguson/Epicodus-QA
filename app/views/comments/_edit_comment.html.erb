@@ -1,0 +1,11 @@
+<div id="edit-comment-view">
+  <h3>Edit Comment</h3>
+  <%= form_for comment, id: "edit_comment", remote: true do |f| %>
+    <%= render "shared/form_errors", object: comment %>
+    <%= f.hidden_field :commentable_id %>
+    <%= f.hidden_field :commentable_type %> 
+    <%= f.label :content %>
+    <%= f.text_area :content %>
+    <%= f.submit "Update", class: "button", method: "patch" %>
+  <% end %>
+</div>
