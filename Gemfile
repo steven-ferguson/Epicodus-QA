@@ -14,6 +14,8 @@ gem 'foundicons-rails'
 gem 'devise'
 gem 'will_paginate'
 gem 'foundation-will_paginate'
+gem 'unicorn'
+gem 'rails_12factor'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
