@@ -29,3 +29,20 @@ textarea {
   text-align: right;
 }
 
+.header-panel {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #d9d9d9;
+  margin-bottom: 1.25em;
+  padding: 1.25em;
+  background: #f2f2f2;
+}
+
+.icon-large {
+  font-size: em-calc(25px);
+}
+
+.header-left {
+  margin-top: em-calc(35px);
+}
+
