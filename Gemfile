@@ -14,8 +14,7 @@ gem 'foundicons-rails'
 gem 'devise'
 gem 'will_paginate'
 gem 'foundation-will_paginate'
-gem 'unicorn'
-gem 'rails_12factor'
+gem 'cancan'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
@@ -33,6 +32,11 @@ group :test do
   gem 'capybara'
   gem 'factory_girl_rails'
   gem 'poltergeist'
+end
+
+group :production do 
+  gem 'unicorn'
+  gem 'rails_12factor'
 end
 
 # Use ActiveModel has_secure_password

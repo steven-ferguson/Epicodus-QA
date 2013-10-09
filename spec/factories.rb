@@ -8,6 +8,11 @@ FactoryGirl.define do
     end
     password "foobar11"
     password_confirmation "foobar11"
+    admin false
+
+    factory :admin do 
+      admin true
+    end
   end
 
   factory :question do 

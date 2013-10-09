@@ -3,8 +3,10 @@
   <p class='min_margin'><span><%= object.content %></span> - 
     <a><%= object.user.email %></a> 
     <%= object.created_at.strftime("(%A %B %-d at %I:%m)") %>
-    <% if current_user == object.user %>
+    <% if can? :update, object %>
       <%= link_to '', edit_comment_path(object), class: 'fi-edit', remote: true %>
+    <% end %>
+    <% if can? :destroy, object %>
       <%= link_to '', comment_path(object), method: 'delete', class: 'fi-trash', remote: true %>
     <% end %>
   </p>

@@ -25,15 +25,23 @@ class CommentsController < ApplicationController
     end
   end
 
-  def edit 
+  def edit
     @comment = Comment.find(params[:id])
-    render 'edit.js'
+    if can? :update, @comment
+      render 'edit.js'
+    else
+      unauthorized!
+    end
   end
 
   def update 
     @comment = Comment.find(params[:id])
-    @comment.update(comment_params)
-    render 'update.js'
+    if can? :update, @comment
+      @comment.update(comment_params)
+      render 'update.js'
+    else 
+      unauthorized!
+    end
   end
 
 private
