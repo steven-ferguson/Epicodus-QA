@@ -35,32 +35,23 @@ feature "View a question" do
   end
 end
 
-feature "Edit a comment" do
-  let(:user) { FactoryGirl.create :user }
-  let(:question) { FactoryGirl.create(:question) }
-  before do 
-    visit root_path
-    click_link "Sign in"
-    fill_in 'Email', :with => user.email
-    fill_in 'Password', :with => user.password
-    click_on "Submit"
-  end
-
-  scenario "successfully", js: true do
-    comment = question.comments.create(user: user, content: "This is a comment")
-    visit question_path(question)
-    find(".fi-edit").trigger('click')
-    fill_in 'comment_content', :with => " Additional text"
-    click_on('Update')
-    page.should have_content "Additional text"
-  end
-end
-
 feature "Pagination" do 
   scenario "pagination on the questions index page" do 
     11.times { FactoryGirl.create(:question) }
     visit root_path
     page.should have_content "2"
+  end
+end
+
+feature "Delete a question" do 
+  scenario "an admin deletes a comment" do 
+    user = FactoryGirl.create(:admin)
+    login_as(user, :scope => :user)
+    question = FactoryGirl.create(:question)
+    visit question_path(question)
+    find(".fi-trash").click
+    page.should_not have_content(question.title)
+    page.should have_content "successfully"
   end
 end
 

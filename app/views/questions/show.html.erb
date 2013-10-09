@@ -3,7 +3,12 @@
 </div>
 <div id="question" class="row">
   <div class="row">
-    <h3 class="subheader"><%= @question.title %></h3>
+    <h3 class="subheader">
+      <%= @question.title %>
+      <% if can? :destroy, @question %>
+        <%= link_to '', question_path(@question), method: "delete", class: "fi-trash" %> 
+      <% end %>
+    </h3>
     <h6 class="subheader">Asked by <%= @question.user.email %> at: <%= @question.created_at.strftime("%A %B %-d at %I:%m") %></h6>
   </div>
   <div class="row">

@@ -23,6 +23,16 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
   end
 
+  def destroy 
+    @question = Question.find(params[:id])
+    if can? :destroy, @question 
+      @question.destroy
+      redirect_to root_path, notice: "Question successfully deleted."
+    else 
+      redirect_to root_path
+    end
+  end
+
 private
 
   def question_params
