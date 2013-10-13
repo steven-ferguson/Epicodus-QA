@@ -4,19 +4,19 @@
 <div class="row">
   <div class="header-panel">
     <div class="row">
-      <div class="small-3 columns">
+      <div class="large-3 small-5 columns">
         <p class="lead header-left"> This is a question and answer site for student's of Epicodus. Here's how it works:</p>
       </div>
-      <div class="small-9 columns">
-        <div class="small-4 columns">
+      <div class="large-9 small-7 columns">
+        <div class="large-4 small-12 columns">
           <h1 class="center"><i class="fia-question icon-large"></i></h1>
           <p class="lead">A student asks a question.</p>
         </div>
-        <div class="small-4 columns">
+        <div class="large-4 small-12 columns">
           <h1 class="center"><i class="fi-idea icon-large"></i></h1>
           <p class="lead">Other students answer.</p>
         </div>
-        <div class="small-4 columns">
+        <div class="large-4 small-12 columns">
           <h1 class="center"><i class="fis-thumb-up icon-large"></i></h1>
           <p class="lead">The best answers are voted up.</p>
         </div>
@@ -31,7 +31,7 @@
   <div class="small-4 columns">
     <%= link_to "Ask a question", new_question_path, class: "button" %>
   </div>
-  <div class="small-2 small-offset-6 columns">
+  <div class="large-2 large-offset-6  small-5 columns">
     <h5><%= foundation_paginate @questions %></h5>
   </div>
 </div>
@@ -41,15 +41,15 @@
       <li>
         <hr>
         <div class="row">
-          <div class="small-2 columns">
+          <div class="large-2 small-offset-1 small-3 columns">
             <h3 class="subheader"><%= pluralize(question.answers.count, "Answer") %><h3>
           </div>
-          <div class="small-9 columns">
+          <div class="large-9 small-8 columns">
             <div class="row">
               <h4 class="subheader"><%= link_to question.title, question_path(question) %></h4>
             </div>
             <div class="row">
-              <p class='text-right'><%= question.user.email %> at: <%= question.created_at.strftime("Asked on %A %B %-d at %I:%m") %></p>
+              <p><%= question.user.email %> <%= question.created_at.strftime("Asked on %A %B %-d at %I:%m") %></p>
             </div>
           </div>
         </div>
