@@ -3,7 +3,7 @@
 </div>
 <div id="question" class="row">
   <div class="row">
-    <h3 class="subheader">
+    <h3 class="subheader columns">
       <%= @question.title %>
       <% if can? :destroy, @question %>
         <%= link_to '', question_path(@question), method: "delete", class: "fi-trash" %> 
