@@ -6,9 +6,9 @@ This is a forum for questions about programming for the Epicodus class (http://w
 == Local Machine Installation
 After cloning the repository, run 
 
-```ruby 
-bundle install
-rake db:create
-rake db:migrate
-rails s
-```
+ 
+    bundle install
+    rake db:create
+    rake db:migrate
+    rails s
+
