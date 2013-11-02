@@ -26,4 +26,13 @@ FactoryGirl.define do
     user 
     question
   end
+
+  factory :comment do 
+    user
+    content 'What a great comment!'
+
+    factory :comment_to_question do 
+      association :commentable, factory: :question 
+    end
+  end
 end
