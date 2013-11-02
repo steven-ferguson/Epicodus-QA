@@ -59,14 +59,34 @@ feature "Pagination" do
 end
 
 feature "Delete a question" do 
-  scenario "an admin deletes a comment" do 
+  before do 
+    @question = FactoryGirl.create(:question)
+  end
+
+  scenario "an admin deletes a question" do 
     user = FactoryGirl.create(:admin)
     login_as(user, :scope => :user)
-    question = FactoryGirl.create(:question)
-    visit question_path(question)
-    find(".fi-trash").click
-    page.should_not have_content(question.title)
+    visit question_path(@question)
+    within("#question-title") { click_link("") }
+    page.should_not have_content(@question.title)
     page.should have_content "successfully"
+  end
+
+  context 'a non-admin' do 
+    before do 
+      user = FactoryGirl.create(:user)
+      login_as(user, :scope => :user)
+    end
+
+    scenario "they can't see a delete icon" do 
+      visit question_path(@question)
+      within('#question-title') { page.should_not have_css '.fi-trash' }
+    end
+
+    scenario "they can't submit a DELETE request directly" do 
+      page.driver.submit :delete, question_path(:id => @question.id), {}
+      page.should have_content 'Not authorized'
+    end
   end
 end
 
