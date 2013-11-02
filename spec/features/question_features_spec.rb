@@ -1,28 +1,43 @@
 require 'spec_helper'
 
-feature "Post a question" do 
-  scenario "a user successfully posts a question" do 
-    user = FactoryGirl.create(:user)
-    visit root_path
-    click_link "Sign in"
-    fill_in 'Email', :with => user.email
-    fill_in 'Password', :with => user.password
-    click_on "Submit"
-    click_link "Ask a question"
-    fill_in 'question_title', :with => "This is the title"
-    fill_in 'question_content', :with => "Does this thing work?"
-    click_on "Post your question"
-    page.should have_content 'successfully'
-    page.should have_content 'This is the title'
+feature "Post a question" do
+  context 'a registered user' do 
+    scenario "they successfully post a question" do 
+      user = FactoryGirl.create(:user)
+      visit root_path
+      click_link "Sign in"
+      fill_in 'Email', :with => user.email
+      fill_in 'Password', :with => user.password
+      click_on "Submit"
+      click_link "Ask a question"
+      fill_in 'question_title', :with => "This is the title"
+      fill_in 'question_content', :with => "Does this thing work?"
+      click_on "Post your question"
+      page.should have_content 'successfully'
+      page.should have_content 'This is the title'
+    end
+
+    scenario "they submit an invalid question" do
+      user = FactoryGirl.create(:user)
+      login_as(user, :scope => :user)
+      visit root_path
+      click_link "Ask a question"
+      click_on "Post your question"
+      page.should have_content 'blank'
+    end
   end
 
-  scenario "a user does not submit a valid question" do
-    user = FactoryGirl.create(:user)
-    login_as(user, :scope => :user)
-    visit root_path
-    click_link "Ask a question"
-    click_on "Post your question"
-    page.should have_content 'blank'
+  context 'a guest' do 
+    scenario 'they can not visit the path directly' do 
+      visit new_question_path
+      page.should have_content 'You need to sign in'
+    end
+
+    scenario 'they can not submit a POST request directly' do 
+      user = FactoryGirl.create(:user)
+      page.driver.submit :post, questions_path(:question => {:user_id => user.id, :title => 'Cool Title', :content => "Words"}), {}
+      page.should have_content 'You need to sign in'
+    end
   end
 end
 
