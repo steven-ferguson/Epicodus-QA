@@ -1,10 +1,16 @@
 language: ruby
 rvm:
-  - "2.0.0"
+- 2.0.0
 env:
-  - DB=postresql
-script: 
-  - bundle exec rake db:test:prepare --trace
-  - bundle exec rspec
+- DB=postresql
+script:
+- bundle exec rake db:test:prepare --trace
+- bundle exec rspec
 before_script:
-  - psql -c 'create database epicodus_overflow_test;' -U postgres
+- psql -c 'create database epicodus_overflow_test;' -U postgres
+deploy:
+  provider: heroku
+  api_key:
+    secure: D9Z5EjYV/X1cIyxAtZ3l21SoK8HscJBgFe/+cK3gGZG5ozTjlUFOjN/bVN6SqHFagO8nRsvtRay6Jn9aQg3wIvASWqIpk0OwqJQXWI6cr6KAHKL8yVFLSMEAHp4C5iO+AJJYwUPqLbxTaH0rKcp6j6aG47ut3qO2zmvwe+ywsY0=
+  app: epicodus-qa
+  run: "rake db:migrate"
