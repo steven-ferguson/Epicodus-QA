@@ -13,4 +13,6 @@ deploy:
   api_key:
     secure: D9Z5EjYV/X1cIyxAtZ3l21SoK8HscJBgFe/+cK3gGZG5ozTjlUFOjN/bVN6SqHFagO8nRsvtRay6Jn9aQg3wIvASWqIpk0OwqJQXWI6cr6KAHKL8yVFLSMEAHp4C5iO+AJJYwUPqLbxTaH0rKcp6j6aG47ut3qO2zmvwe+ywsY0=
   app: epicodus-qa
+  on:
+  	rvm: 2.0.0
   run: "rake db:migrate"
