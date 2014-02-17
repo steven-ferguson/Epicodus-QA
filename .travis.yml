@@ -5,5 +5,6 @@ env:
   - DB=postresql
 script: 
   - bundle exec rake db:test:prepare --trace
+  - bundle exec rspec
 before_script:
   - psql -c 'create database epicodus_overflow_test;' -U postgres
