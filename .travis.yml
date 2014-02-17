@@ -4,6 +4,6 @@ rvm:
 env:
   - DB=postresql
 script: 
-  - RAILS_ENV=test bundle exec rake --trace db:migrate test
+  - bundle exec rake db:test:prepare --trace
 before_script:
   - psql -c 'create database epicodus_overflow_test;' -U postgres
