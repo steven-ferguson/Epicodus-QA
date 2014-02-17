@@ -1,4 +1,4 @@
-Epicodus QA
+Epicodus QA [![Build Status](https://travis-ci.org/steven-ferguson/Epicodus-QA.png)](https://travis-ci.org/steven-ferguson/Epicodus-QA)
 ===========
 This is a forum for questions about programming for the Epicodus class (http://www.epicodus.com). It is based on the Stack Overflow forum. This app helped me to learn Devise and CanCan, to practice integration testing and to work on using AJAX with Rails.  
 
